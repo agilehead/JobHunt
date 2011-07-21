@@ -1,0 +1,8 @@
+Hello,
+
+Email Id Verification.
+
+Please place the following link - "http://www.jobhunt.in/recruiters/emailverified.htm?key=$recruiter_key" in a browser, to verify your Email Id with us.
+
+Regards,
+Jobhunt.in Team

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--[if lt IE 8]>
+    <script src="/scripts/IE8.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/scripts/mootools.js"></script>
+
+    <script type="text/javascript" src="/scripts/backslash.js"></script>
+
+    <script type="text/javascript">
+
+
+        function checkValidEmail(email) {
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!filter.test(trim(email))) {
+                alerts.displayMessage(email + ' is not a valid Email.');
+                return false;
+            }
+            else { return true; }
+        }
+
+        function validateNSubmit(){
+            if($('email1') && $('email1').value != '') {
+                if(!checkValidEmail($('email1').value)){
+                    return;
+                }
+            }
+            if($('email2') && $('email2').value != '') {
+                if(!checkValidEmail($('email2').value)){
+                    return;
+                }
+            }
+            if($('email3') && $('email3').value != '') {
+                if(!checkValidEmail($('email3').value)){
+                    return;
+                }
+            }
+            if($('email4') && $('email4').value != '') {
+                if(!checkValidEmail($('email4').value)){
+                    return;
+                }
+            }
+            if($('email5') && $('email5').value != '') {
+                if(!checkValidEmail($('email5').value)){
+                    return;
+                }
+            }
+            document.invite_form.submit();
+        }
+
+        function onLoad() {
+        }
+    </script>
+
+    <link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+    <title>Invite Friends - Jobhunt.in</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    {{py_scripts}}
+</head>
+<body onload="javascript:onLoad();">
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+        <div id="navbar">
+            <a href="/recruiters/dashboard.htm">Dashboard</a> &gt; Invite Friends</div>
+        <div id="content">
+            <h1>
+                Invite Recruiters</h1>
+            <div id="alertBox" class="invisible">
+            </div>
+            <p>
+                {{invite_message}}</p>
+            {% if email_boxes_html %}
+            <div class="content-box">
+                <form id="invite_form" name="invite_form" method="post" action="">
+                <div class="para">
+                    Email addresses
+                    {{email_boxes_html}}
+                </div>
+                <p>
+                    <input name="Button" type="button" value="Send Invites" class="medium" onclick="javascript:validateNSubmit();" />
+                </p>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

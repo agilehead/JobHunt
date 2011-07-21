@@ -1,0 +1,10 @@
+Thanks for signing up on Jobhunt.in.
+You registered for an anonymous account.
+
+Your username is $username. 
+Get started by going to www.jobhunt.in. 
+
+If you have any questions, email support@jobhunt.in.
+
+Regards,
+Jobhunt.in Team

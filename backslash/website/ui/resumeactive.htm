@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--[if lt IE 8]>
+    <script src="/scripts/IE8.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/scripts/mootools.js"></script>
+<script type="text/javascript" src="/scripts/backslash.js"></script>
+
+    <link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+    <title>jobhunt.in - Resume Uploaded</title>
+    <style type="text/css">
+        .content-box h3
+        {
+            margin-top: 0px;
+            margin-bottom: 4px;
+        }
+        #sendButton
+        {
+            width: 192px;
+        }
+    </style>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+    <script type="text/javascript">
+        function onLoad() {
+            document.getElementById('minSalary').focus();
+        }
+
+        function verifyNSubmit() {
+            var isValid = function(inputIDs) {
+                for (var i = 0; i < inputIDs.length; i++) {
+                    //for now assume all the elems are select boxen.
+                    if ($(inputIDs[i]).value == 'Select' || $(inputIDs[i]).value == '-')
+                        return false;
+                }
+                return true;
+            }
+            if (!isValid(['minSalary', 'preferredLocations', 'desiredEmployer'])) {
+                alert('Please select your preferences. All fields are mandatory.');
+            } else {
+                document.forms[0].submit();
+            }
+        }
+
+        function youSure() {
+            var dontSave = window.confirm("Are you sure you don't want to save job preferences?");
+            if (dontSave) window.location = "/done.html";
+        }
+    </script>
+
+    {{py_scripts}}
+</head>
+<body onload="javascript:onLoad()">
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+        <div id="content">
+            {% if not from_email %}
+            <h1>
+                Resume Uploaded. Done!
+            </h1>
+            <p>
+                You resume is now active, and will be automatically emailed
+                <br />
+                to companies that have job openings matching your skills.</p>
+            {% else %}
+            <h1>
+                Job Preferences</h1>
+            <p>
+                Letting recruiters know about your job preferences<br />
+                will help them send you opportunities that suit you better.</p>
+            {% endif %}
+            <form action="" method="post">
+            <div class="content-box">
+                {% if not from_email %}<h3>
+                    Have more job preferences?</h3>
+                <p>
+                    Letting recruiters know about your job preferences<br />
+                    will help them send you opportunities that suit you better.</p>
+                <p class="small">
+                    <em>This step is optional, but recommended.</em></p>
+                {% endif %}
+                <p>
+                    Minimum Salary<br />
+                    <select name="minSalary" id="minSalary">
+                        <option selected="selected" value="Select">Select</option>
+                        <option value="100000">1 Lakh</option>
+                        <option value="200000">2 Lakhs</option>
+                        <option value="300000">3 Lakhs</option>
+                        <option value="400000">4 Lakhs</option>
+                        <option value="500000">5 Lakhs</option>
+                        <option value="600000">6 Lakhs</option>
+                        <option value="800000">8 Lakhs</option>
+                        <option value="1000000">10 Lakhs</option>
+                        <option value="1200000">12 Lakhs</option>
+                        <option value="1400000">14 Lakhs</option>
+                        <option value="1600000">16 Lakhs</option>
+                        <option value="2000000">20 Lakhs</option>
+                        <option value="2400000">24 Lakhs</option>
+                        <option value="3000000">30 Lakhs</option>
+                    </select>
+                </p>
+                <p>
+                    Preferred Location
+                    <br />
+                    <select name="preferredLocations" id="preferredLocations">
+                        <option selected="selected" value="Select">Select</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="NCR">Delhi,Noida,NCR</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="-">-</option>
+                        <option value="Anywhere">Anywhere</option>
+                        <option value="-">-</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="-">-</option>
+                        <option value="North India">Anywhere in North India</option>
+                        <option value="South India">Anywhere in South India</option>
+                        <option value="East India">Anywhere in East India</option>
+                        <option value="West India">Anywhere in West India</option>
+                    </select><br />
+                </p>
+                <p>
+                    What type of companies or jobs do you like?<br />
+                    <select name="desiredEmployer" id="desiredEmployer">
+                        <option selected="selected" value="Select">Select</option>
+                        <option value="Any">Any (No Preference)</option>
+                        <option value="Large Companies or MNCs">Only Large Companies/MNCs</option>
+                        <option value="Consulting">Only Consulting Roles</option>
+                        <option value="Part-time">Only Part-time Jobs</option>
+                        <option value="Abroad">Only Jobs outside India</option>
+                    </select>
+                </p>
+                <p>
+                    <input name="sendButton" type="button" id="sendButton" value="Save Preferences" onclick="javascript:verifyNSubmit();" /> <a href="javascript:youSure();">No, Thanks.</a></p>
+                <input name="key" type="hidden" id="key" value="{{user_key}}" />
+            </div>
+            </form>
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

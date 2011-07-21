@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--[if lt IE 8]>
+    <script src="/scripts/IE8.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/scripts/mootools.js"></script>
+<script type="text/javascript" src="/scripts/backslash.js"></script>
+    <script type="text/javascript" src="/scripts/noobSlide/_class.noobSlide.js"></script>
+    <link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+    //<![CDATA[
+        //JSON data pushed from the server.
+        var categorization = {{categorization}};
+        var setupInProgress = false;
+
+        function setup()    {
+            setupInProgress = true;
+            $('industries').empty();
+            populateIndustries();
+
+            //attach events to selectboxento be listened to.
+            $('industries').addEvent('change', onSelectIndustry);
+            $('profiles').addEvent('change', onSelectProfile);
+            $('formats').addEvent('change', onSelectFormat);
+            setupInProgress = false;
+        }
+
+        function setupNoobSlide()   {
+            var nS4 = new noobSlide({
+                box: $('gallery-items'),
+                items: $$('#gallery-items div'),
+                size: 800,
+                handles: $$('#theme-nav span'),
+                onWalk: function(currentItem, currentHandle) {
+                    scrollToGallery();
+                    this.handles.removeClass('selected-theme');
+                    this.handles.addClass('theme');
+                    currentHandle.removeClass('theme');
+                    currentHandle.addClass('selected-theme');
+                }
+            });
+        }
+
+		function getRandRootUrl()	{
+			return 'http://s' + Math.ceil(Math.random() * 4) + '.jobhunt.in/'
+		}
+
+        function populateIndustries()   {
+            //industries have to be loaded anyway
+            //the outer list are industries
+            var ctr = 0;
+            var industries = categorization;
+            industries.items.each(function(industry) {
+                var option = new Element('option', {
+                    'id': 'industries' + ctr,
+                    'text': industry['name'],
+                    'value': industry['value']
+                });
+                option.inject($('industries'), 'bottom');
+
+                //If the default is defined, set it.
+                if (typeof(industries['default']) != 'undefined')		{
+                    if (industry.value == industries['default'])   {
+                        $('industries').selectedIndex = ctr;
+	                    onSelectIndustry();
+                    }
+				}
+                ctr++;
+            });
+        }
+
+        function populateProfiles() {
+            var ctr = 0;
+            var profiles = getCategory(categorization, [$('industries').value]);
+            profiles.items.each(function(profile)  {
+                var option = new Element('option', {
+                    'id': 'profiles' + ctr,
+                    'text': profile['name'],
+                    'value': profile['value']
+                });
+                option.inject($('profiles'), 'bottom');
+
+                //If the default is defined, set it.
+                if (typeof(profiles['default']) != 'undefined')
+                    if (profile.value == profiles['default'])  {
+                        $('profiles').selectedIndex = ctr;
+                        onSelectProfile();
+                    }
+                ctr++;
+            });
+        }
+
+        function populateFormats()  {
+            var ctr = 0;
+            var formats = getCategory(categorization, [$('industries').value, $('profiles').value]);
+            formats.items.each(function(format)  {
+                var option = new Element('option', {
+                    'id': 'format' + ctr,
+                    'text': format['name'],
+                    'value': format['value']
+                });
+                option.inject($('formats'), 'bottom');
+
+                //If the default is defined, set it.
+                if (typeof(formats['default']) != 'undefined')
+                    if (format.value == formats['default'])    {
+                        $('formats').selectedIndex = ctr;
+                        onSelectFormat();
+                    }
+                ctr++;
+            });
+        }
+
+        function populateThemes()  {
+			var arrThemes = new Array();
+            var themes = getCategory(categorization, [$('industries').value, $('profiles').value, $('formats').value]);
+			var selTheme = (typeof(themes['default']) != 'undefined') ? themes['default'] : themes[0];
+
+			var previewHtml = '';
+			var preloadHtml = '';
+            themes.items.each(function(theme)  {
+				if (theme.value == selTheme)	{
+					arrThemes.push('<span class="selected-theme">' + theme['name'] + '</span>');
+				}	else	{
+					arrThemes.push('<span class="theme">' + theme['name'] + '</span>');
+				}
+				var themePrefix = $('industries').value + '-' + $('profiles').value + '-' + $('formats').value + '-' + theme.value;
+	            previewHtml += '<div><table style="margin:auto; width: 520px;"><tr>' +
+                        '<td><a href="/gallery/resumes/docs/' + themePrefix + '.doc"><img  src="/images/gallery/download-button.png" alt="Download" \/><\/a><\/td>' +
+                        '<td style="line-height:1.0em"><span style="font-size:12px">Looking for a new job?<\/span><br \/> <a href="/">Upload your Resume<\/a><\/td>' +
+                        '<td style="line-height:1.0em"><span style="font-size:12px">Like the gallery?<\/span><br \/> <a href="/tellfriends.htm">Share with Friends<\/a><\/td>' +
+                        '<\/tr><\/table><div id="' + themePrefix + '-frame" class="preview-frame-empty"><a href="/gallery/resumes/docs/' + themePrefix + '.doc"><img id="' + themePrefix + '" class="preview-image" src="/images/gallery/image-loading.gif" alt="Resume" \/><\/a><\/div><\/div>';
+
+				preloadHtml += '<img id="' + themePrefix + '-preload" src="' + getRandRootUrl() + 'gallery/resumes/preview/' + themePrefix + '.gif" onload="javascript:onImageLoad(\'' + themePrefix + '\');" onerror="javascript:onImageError(\'' + themePrefix + '\');" \/>';
+            });
+
+			$('gallery-items').innerHTML = previewHtml;
+			$('theme-nav').innerHTML = arrThemes.join(' | ');
+			$('preload-area').innerHTML = '<img src="/images/gallery/resume-bg.png" \/>' + preloadHtml;
+
+            setupNoobSlide();
+        }
+
+	function onImageError(imageId)	{
+		$(imageId).src = '/images/gallery/preview-not-available.png';
+	}
+
+	function onImageLoad(imageId)	{
+	    $(imageId+'-frame').removeClass('preview-frame-empty');
+	    $(imageId+'-frame').addClass('preview-frame-loaded');
+		$(imageId).src = $(imageId + '-preload').src;
+	}
+
+        function getCategory(dataset, keyList)  {
+            for (var i = 0; i < dataset.items.length; i++)  {
+                category = dataset.items[i];
+                if (category.value != keyList[0])
+                    continue;
+                if (keyList.length > 1)
+                    return getCategory(category.subCategories, keyList.slice(1));
+                else
+                    return category.subCategories;
+            }
+        }
+
+        function onSelectIndustry() {
+            $('profiles').empty();
+            $('formats').empty();
+            populateProfiles();
+        }
+
+        function onSelectProfile() {
+            $('formats').empty();
+            populateFormats();
+        }
+
+        function onSelectFormat(e) {
+	        scrollToGallery();
+			setupCallout();
+	        $('gallery-items').innerHTML = '';
+	        $('theme-nav').innerHTML = '';
+	        populateThemes();
+        }
+
+        function scrollToGallery()  {
+            if (!setupInProgress)   {
+                //Scroll a little to have most of the preview visible
+                var scroller = new Fx.Scroll(document.body);
+                scroller.start(0,172);
+            }
+        }
+
+	function setupCallout()	{
+	    var formats = getCategory(categorization, [$('industries').value, $('profiles').value]);
+	    var selFormat = $('formats').value;
+	    formats.items.each(function(format)  {
+		    if (format.value == selFormat)	{
+			    var calloutLink = $('calloutLink');
+			    calloutLink.innerHTML = "Explain " + format['name'];
+			    calloutLink.title = format['name'] + ' :: ' + format['description'];
+		    }
+	    });
+
+	    $$('a.callout').each(function(element,index) {
+		     var content = element.get('title').split('::');
+		     element.store('tip:title', content[0]);
+		     element.store('tip:text', content[1]);
+	    });
+
+	    //setting up the tooltips
+	    var Tipz = new Tips($$('.callout'), {
+		    showDelay: 400,
+		    hideDelay: 400
+	    });
+	}
+
+        window.addEvent('domready', setup);
+    //]]>
+    </script>
+
+    <title>Resume Gallery - Jobhunt.in</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <style type="text/css">
+        table tr td
+        {
+            padding: 4px;
+        }
+        h3
+        {
+            margin: 12px 0px 0px 0px;
+            padding: 0px;
+        }
+        .preview-frame-loaded
+        {
+            background: #fff url(/images/gallery/resume-bg.png) no-repeat;
+            width: 800px;
+        }
+        .preview-frame-empty
+        {
+            width: 800px;
+        }
+        .preview-image
+        {
+            margin-top: 8px;
+        }
+        .shell .content-box
+        {
+            height: 140px;
+            background-color: #fafafa;
+        }
+        #gallery
+        {
+            position: relative;
+            width: 800px;
+            height: 1200px;
+            overflow: hidden;
+            margin-left: 80px;
+        }
+        #gallery-items
+        {
+            position: absolute;
+        }
+        span.theme
+        {
+            color: #26d;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        span.selected-theme
+        {
+            color: Black;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        #gallery-items div
+        {
+            width: 800px;
+            height: 1032px;
+            float: left;
+        }
+        .tip
+        {
+			width: 240px;
+			text-align:left;
+		}
+        .tip-title
+        {
+            font-weight: bold;
+            font-size: 11px;
+            margin: 0;
+            color: #FFF;
+            padding: 8px 8px 4px;
+            background: url(../images/gallery/bubble.gif) top left;
+        }
+        .tip-text
+        {
+            font-size: 11px;
+            color: #FFFFFF;
+            padding: 4px 8px 8px;
+            background: url(../images/gallery/bubble.gif) bottom right;
+        }
+    </style>
+    {{py_scripts}}
+</head>
+<body>
+    <div id="preload-area" style="display: none">
+    </div>
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+        <div id="content">
+            <h1>
+                Resume Gallery</h1>
+            <div class="content-box wide">
+                <table style="margin: auto">
+                    <tr>
+                        <td>
+                            Industry<br />
+                            <select name="industries" id="industries" style="width: 148px">
+                            </select>
+                        </td>
+                        <td>
+                            Job Profile<br />
+                            <select name="profiles" id="profiles" style="width: 148px">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Format<br />
+                            <select name="formats" id="formats" style="width: 148px">
+                            </select>
+                            <span class="small"><a id="calloutLink" href="#" onclick="return false;" class="callout"
+                                title="Callout Message.">Explain</a></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <div id="gallery">
+                    <h3>
+                        Select a theme</h3>
+                    <p id="theme-nav" class="small">
+                    </p>
+                    <div id="gallery-items">
+                        <!--<div>
+                            <table style="margin: auto; width: 400px;">
+                                <tr>
+                                    <td>
+                                        <div class="preview-frame-empty">
+                                            <img class="preview-image" src="/images/gallery/download-button.png" alt="Download" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="/images/gallery/rating-4.png" alt="Download" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <p>
+                                <img src="resumes/it-chronological-developer.png" alt="Resume" /></p>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

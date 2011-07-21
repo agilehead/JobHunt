@@ -1,0 +1,6 @@
+Your resume has been added.
+Your resume has been added to our database, and will be automatically emailed to companies that have matching job openings.
+Your resume will be accessible to companies for two months. If you wish, you may delete it [http://www.jobhunt.in/removeresume.htm?key=$user_key] earlier. To make your resume available after two months, simply upload a new one.
+
+Regards, 
+Jobhunt.in Team

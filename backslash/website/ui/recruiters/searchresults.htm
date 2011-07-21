@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<!--[if lt IE 8]>
+		<script src="/scripts/IE8.js" type="text/javascript"></script>
+	<![endif]-->
+	<script type="text/javascript" src="/scripts/mootools.js"></script>
+	<script type="text/javascript" src="/scripts/backslash.js"></script>
+	<link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+	<title>Profile Matches - Jobhunt.in</title>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	function  getPage(page_num)        {
+		if (page_num != null){
+		$('page').value = page_num;
+		}
+		else {
+		$('page').value = $('pageselect').options[$('pageselect').selectedIndex].value;
+		}
+
+		document.form.submit();
+	}
+	
+	function selectAll()	{
+		$$("input.chkbox_selectuser").each(function (chkbox) { chkbox.checked = true; });
+	}
+	
+	function selectNone()	{
+		$$("input.chkbox_selectuser").each(function (chkbox) { chkbox.checked = false; });
+	}
+	
+	function mailSelectedUsers()	{
+		var email_list = new Array();
+		$$("input.chkbox_selectuser").each(function (chkbox) {
+			if (chkbox.checked)	{
+				//chkbox_
+				email_list.push($('email_' + chkbox.id.substring(7)).value);
+			}
+		});
+		if (email_list.length == 0)	{
+			alert('Please select the users to be mailed');
+			return;
+		} else {
+			$('email_list').value = email_list.join(';');
+			$('email_form').action += '?action=show_form'
+			$('email_form').submit();
+		}
+	}
+	
+	function mailAll()	{
+		$('email_query').value = $('searchTuple').value;
+		$('email_form').action += '?action=show_form'
+		$('email_form').submit();
+	}
+
+	/* ]]> */
+	</script>
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    {{py_scripts}}
+</head>
+<body>
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+	<div id="navbar">
+            <a href="/recruiters/dashboard.htm">Dashboard</a> &gt; Search Report
+        </div>
+	<h1>Search Report</h1>
+	<p><img src="/images/search.png" alt="search" /> <a href="/recruiters/dashboard.htm">New Search</a> |
+		<img src="/images/add.gif" alt="add" /> <a href="/recruiters/subscribe.htm?{{search_url}}">Add as subscription</a> |
+		<img src="/images/email.gif" alt="add" /> <a href="javascript:mailSelectedUsers();">Mail Selected Users</a> |
+		<img src="/images/email.gif" alt="add" /> <a href="javascript:mailAll();">Mail All</a></p>
+        <div id="content" style="margin: 12px auto 32px auto; text-align: left; width: 640px; padding: 8px;
+            border: solid 1px #ccc">
+	<form method="post" action="emailusers.htm" enctype="multipart/form-data" name="email_form" id="email_form">
+		<input type="hidden" id="email_list" name="email_list" />
+		<input type="hidden" id="email_query" name="email_query" />
+	</form>
+	<form method="post" action="searchresults.htm" enctype="multipart/form-data" name="form" id="form">
+	  <input type="hidden" id="page" name="page"/>
+	  <input type="hidden" id="sub_id" name="sub_id" value="{{subscription_id}}" />
+	  <input type="hidden" id="searchTuple" name="searchTuple" value="{{search_tuple}}" />
+	  <h1 style="font-weight: normal; font-size: 20px; margin: 8px; margin-top: 12px; background-color: #f6f6f6;
+			padding: 4px;"> <span style="color: #999">{{num_results}} matches for </span>{{search_desc}}</h1>
+	  <p style="margin: 0px 0px 8px 12px"> {{date}} </p>
+	  <div style="margin: 0px 12px 0px 12px">
+		Select: <a href="javascript:selectAll();">All</a>, <a href="javascript:selectNone()">None</a>.
+	    <!-- Entry -->
+	    {% if users %}
+		{% for user in users %}
+		    {% if user.is_premium_user %}
+		<h2 style="font-weight: bold; font-size: 14px; margin: 12px 0px 0px 0px; background-color: #fee;
+		    padding: 4px; border: solid 1px #eaead6;">
+		    <input type="checkbox" id="chkbox_{{user.index}}" name="chkbox_{{user.index}}" class="chkbox_selectuser" style="margin-top:2px" />
+		    <span style="vertical-align:top">{{ user.index }}. Name hidden (Premium Account)</span></h2>
+		<input type="hidden" id="email_{{user.index}}" name="email_{{user.index}}" value="{{user.email}}" />
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 14px">
+		    {{user.profile_info}}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    <span style="color: #999">Updated:</span> {{user.indexed_on}}<br />
+		    <span style="color: #999">Tagged as:</span> {{user.tags}}<br />
+		    {% if user.min_salary %}<span style="color: #999">Expected salary:</span> {{user.min_salary}}{% if user.pref_employer %}, {% endif %}{% endif %}
+		    {% if user.pref_employment %}<span style="color: #999">Preferred Employment:</span> {{user.pref_employment}}{% endif %}
+		    {% if user.min_salary or user.pref_employment %}<br />{% endif %}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    {{user.summary}}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    View <a href="/recruiters/viewresumesummary.htm?key={{user.key}}&sub_id={{subscription_id}}">Full Summary</a> | Email <a href="mailto:{{user.email}}">{{user.email}}</a>
+		</p>
+		    {%	else	%}
+		<h2 style="font-weight: bold; font-size: 14px; margin: 12px 0px 0px 0px; background-color: #fafae6;
+		    padding: 4px; border: solid 1px #eaead6;">
+		    <input type="checkbox" id="chkbox_{{user.index}}" name="chkbox_{{user.index}}" class="chkbox_selectuser" style="vertical-align:middle;margin-top:0px"/>
+		    {{ user.index }}. {{user.name}}
+		</h2>
+		<input type="hidden" id="email_{{user.index}}" name="email_{{user.index}}" value="{{user.email}}" />
+		<!--<p style="margin: 0px; padding: 0px; line-height: 1.4em; font-size: 12px; text-align:right;"><span style="color: #999">Updated:</span> {{user.indexed_on}}</p>-->
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 14px">
+		    {{user.profile_info}}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    <span style="color: #999">Updated:</span> {{user.indexed_on}}<br />
+		    <span style="color: #999">Tagged as:</span> {{user.tags}}<br />
+		    {% if user.min_salary %}<span style="color: #999">Expected salary:</span> {{user.min_salary}}{% if user.pref_employer %}, {% endif %}{% endif %}
+		    {% if user.pref_employment %}<span style="color: #999">Preferred Employment:</span> {{user.pref_employment}}{% endif %}
+		    {% if user.min_salary or user.pref_employment %}<br />{% endif %}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    {{user.summary}}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    Download <a href="/resumes/html/{{user.key}}?sub_id={{subscription_id}}">HTML</a> | <a href="/resumes/doc/{{user.key}}?sub_id={{subscription_id}}">Microsoft Word</a> | Email <a href="mailto:{{user.email}}">{{user.email}}</a>
+		</p>
+		    {% endif %}
+		 {% endfor  %}
+		{% if links_html %}<p style="margin: 12px 4px 4px 4px; padding: 2px; line-height: 1.4em; font-size: 14px"> Showing {{links_html}} </p>{% endif %}
+	    {% else %}
+	    <h2 style="font-weight: bold; font-size: 14px; margin: 12px 12px 0px 0px; background-color: #fafae6;
+				padding: 4px; border: solid 1px #eaead6"> No Matches for this subscription</h2>
+	    {% endif %}
+	  </div>
+	</form>
+        </div>
+	<div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

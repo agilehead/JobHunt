@@ -1,0 +1,11 @@
+Hello,
+
+New subscription added.
+
+You will be receiving resumes matching '$criteria'. 
+If there are no matches, you will not receive a mail.
+
+To add or remove subscriptions, go to http://jobhunt.in/recruiters/subscriptions.htm?key=$recruiter_key.
+
+Regards,
+Jobhunt.in Team

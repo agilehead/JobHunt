@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<!--[if lt IE 8]>
+		<script src="/scripts/IE8.js" type="text/javascript"></script>
+	<![endif]-->
+	<script type="text/javascript" src="/scripts/mootools.js"></script>
+	<script type="text/javascript" src="/scripts/backslash.js"></script>
+	<link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+	<title>Resume Sent Report - Jobhunt.in</title>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+
+	/* ]]> */
+	</script>
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    {{py_scripts}}
+</head>
+<body>
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+        <div id="navbar">
+            &lt;&lt; <a href="javascript:goBack();">Back to Previous Page</a>
+        </div>
+        <div id="content">
+
+	    <div style="font-size: 14px; margin: 0; padding: 0; font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+    text-align: center;">
+    <div style="margin: 32px auto 0px; text-align: left; width: 640px; padding:8px; border:solid 1px #ccc">
+        <div>
+            <h1 style="font-weight: normal; font-size: 20px; margin: 8px; margin-top: 24px; background-color: #f6f6f6;
+                padding: 4px;">
+                Your profile was emailed to {{ num_of_sends }} recruiters</h1>
+	    <p style="margin: 0px 0px 8px 12px">{{date|date:"jS N, Y"}}</p>
+            <div style="margin-left: 12px">
+                {% for rec in recruiter_infos %}
+
+                <h2 style="font-weight: bold; font-size: 14px; margin: 12px 12px 0px 0px; background-color: #fafae6;
+                        padding: 4px; border: solid 1px #eaead6">{{forloop.counter}}. {{rec.name}}</strong> (<a href="mailto:{{rec.email}}"">{{rec.email}}</a>), {{rec.organization}}</h2>
+                <p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 14px">Searching for {{rec.filter_keywords}} skills with
+                        {{rec.filter_experience}} years of experience in {{rec.filter_location}}.</p>
+                    {% if rec.job_title or rec.job_company or rec.job_description %}
+                <p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px; color: #666;">Job Details:
+                    {{rec.job_title}}{% if rec.job_title and rec.job_company %}, {% endif %} {{rec.job_company}}<br/>
+                    {{rec.job_description}}
+                    </p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <p style="margin: 16px 4px 4px 4px; padding: 4px;">
+                Regards,
+                <br />
+                Jobhunt.in Team</p>
+            <p style="font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+                font-size: 12px; margin: 4px; margin-top: 24px; padding: 4px; color: Gray;">
+                If you don't want to receive emails from jobhunt.in, just send an empty email to
+                <a href="mailto:unsubscribe@jobhunt.in">unsubscribe@jobhunt.in</a>.</p>
+            <p style="font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+                font-size: 12px; margin: 4px; padding: 4px; color: Gray;">
+                &copy;2008 | <a href="http://www.jobhunt.in/about.html" style="color: #79b;">About</a>
+                | <a href="http://www.jobhunt.in/msg.htm" style="color: #79b;">Mail us</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

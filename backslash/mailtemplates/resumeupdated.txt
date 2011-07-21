@@ -1,0 +1,9 @@
+Your resume has been updated.
+Your resume has been updated, and will be automatically emailed to companies that have matching job openings.
+Your resume will be accessible to companies for two months. If you wish, you may delete it [http://www.jobhunt.in/removeresume.htm?key=$resume_key] earlier. To make your resume available after two months, simply upload a new one.
+
+Regards, 
+Jobhunt.in Team
+
+If you think someone else tried to update your resume, go to [http://www.jobhunt.in/msg.htm?type=reportabuse].
+

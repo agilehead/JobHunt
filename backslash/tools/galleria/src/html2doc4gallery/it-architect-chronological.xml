@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resume format="chronological">
+  <!-- parserConfiguration is optional -->
+  <parserConfiguration>
+    <skills defaultType="technical" />
+  </parserConfiguration>
+
+  <!-- resume begins here -->
+
+  <personal>
+    <firstName>Anand</firstName>
+    <middleName></middleName>
+    <lastName>Dhukhi</lastName>
+    <email>dhukhia@yahoo.com</email>
+    <phone>91-98454-45469</phone>
+    <mobilePhone>91-98454-45469</mobilePhone>
+  </personal>
+
+  <objective>
+    As a Technical Architect with more than 10 years of experience in BEA, Oracle,
+    J2EE and other Enterprise Tools, I am looking forward to a technical role with potential
+    for exciting career growth. As an avid and enthusiastic team player, I can easily
+    dissolve into the fabric of the company, and work with the teams for great results.
+  </objective>
+
+  <skills>
+    <skill>BEA AquaLogic and WebLogic (BEA Certified SOA and EAI Architect)</skill>
+    <skill>Java/J2EE, Struts, and Java Server Faces (JSF)</skill>
+    <skill>UML, Modeling and Design Patterns</skill>
+    <skill>Oracle 9i Database Programming (Oracle Certified)</skill>
+    <skill>Proficient in Web based application development (HTML/XHTML, AJAX, CSS)</skill>
+    <skill>
+      Experienced in Application Design, Agile Methodologies and Test-Driven Development
+      (TDD)
+    </skill>
+  </skills>
+
+  <experience>
+    <!-- Intercom Business Systems (IBS) - May 2006 - To Date -->
+
+    <employment>
+      <employer>
+        Intercom Business Systems (IBS)
+      </employer>
+      <start>May 2006</start>
+      <finish>Present</finish>
+      <role>
+        <name>Solution Architect</name>
+        <projects>
+          <project>
+            <name>Retail Claims System</name>
+            <description>
+              <section>
+                Reverb Moon is a Television broadcasting company with over 5 Million customers &amp;
+                10 Satellites, broadcasting over 500 Channels around the world. Claims Entry
+                System is a full life cycle application in J2EE/Java developed for retailers to
+                Create, Update, Delete and Reprint Claims. This Application uses multi-tier java
+                architecture with <skill>BEA-Web Logic Application Server</skill> on the middle tier. This
+                application will handle more volume of transactions compared to the existing
+                Claims application running on ASP (Active Server Pages) and Visual Basic Script.
+              </section>
+              <section>
+                As Technical Architect I was responsible for:
+                <item>
+                  Development of Architecture to migrate the application from ASP to JAVA,
+                  J2EE.
+                </item>
+                <item>
+                  Working with Business Analysts and End Users in gathering requirements for this
+                  application.
+                </item>
+                <item>Assisting business analysts in developing the Functional Req Document.</item>
+                <item>Designing the Technical Requirements Definition (TRD) document.</item>
+                <item>
+                  Working with DB team for design and development of the Database Schema/new RDBMS
+                  Tables for the claims entry system.
+                </item>
+              </section>
+            </description>
+          </project>
+          <project>
+            <name>Stock Trading and Analysis System (STAS2)</name>
+            <description>
+              <section>
+                STAS2 is an evolution of the company's leading stock trading product STAS. STAS2
+                now transacts US $12.5 billion/day, in worldwide transaction volume. With more than
+                2000 concurrent users (a 300% increase over the previous version), the project presented
+                challenges in performance and scalability. Total team size was over 50.
+              </section>
+              <section>
+                <item>BEA AquaLogic for SAP, Oracle Apps Integration</item>
+                <item>Java/J2EE, Struts for the Web Platform, extensive use of AJAX using jQuery</item>
+                <item>Oracle 9i Database Backend</item>
+                <item>Code reviews,Test-Case and Code Coverage audits</item>
+              </section>
+              <section>
+                As Technical Architect,
+                I was responsible for designing the Web System (including UI development
+                and AJAX) and integration with BEA Middleware. Apart from coding, my role
+                involved interviewing the end-users, co-ordination with customers&#39; technical
+                teams, reviewing code and our JUnit test-suite for coverage.
+              </section>
+            </description>
+          </project>
+          <project>
+            <name>Livescore (Stock Ticker for BlackBerry, iPhone, Windows Mobile)</name>
+            <description>
+              <section>
+                LiveScore is an innovative Stock Ticker and Portfolio Management application for
+                road warriors. Its interface is optimized for mobile
+                devices.
+              </section>
+              <section>
+                <item>
+                  <skill>Java/J2EE</skill>, <skill>Struts</skill> for the Web Platform, <skill>Hibernate ORM</skill>
+                </item>
+                <item>Web Services backend, connects with IBS Trading Analysis Mainframe (IBM Z-Series)</item>
+              </section>
+              <section>
+                I was involved in the Modeling and Design of the Application. The application
+                was deployed a full month ahead of schedule, and has consistently achieved 99.9%
+                uptime. We reduced overall effort by relying on Object Relational Mappers
+                (Hibernate) and a suite of Code-Generation tools. This also reduced bugs and
+                consequently, the downtime averages.
+              </section>
+            </description>
+          </project>
+        </projects>
+      </role>
+    </employment>
+
+    <!-- Layman Brothers - March 2005 - May 2007 -->
+
+    <employment>
+      <employer>
+        Layman Brothers
+      </employer>
+      <start>March 2005</start>
+      <finish>May 2007</finish>
+      <role>
+        <name>Project Lead</name>
+        <projects>
+          <project>
+            <name>ZeroStack</name>
+            <description>
+              <section>
+                ZeroStack is Layman's primary trading back-end. It connects to interfaces provided
+                by Stock Exchanges worldwide to execute Stock Trades created over Layman's Web-based
+                Trading Portal. With thousands of traders and voluminous trades, the system had
+                to scale and be extremely secure. The model was architected as an Enterprise Service
+                Bus (ESB), and was built with BEA AquaLogic.
+              </section>
+              <section>
+                <item>BEA Aqualogic (ESB and Business Activity Monitoring) </item>
+                <item>Java Server Faces (JSF), Oracle 9i </item>
+                <item>Interfaced with NASDAQ, FTSE and Nikkei </item>
+              </section>
+              <section>
+                I held the role of a Project Lead, primarily involved in connecting
+                with various Stock Exchanges, and connecting the Real-Time transaction systems to
+                the Service Bus.
+              </section>
+            </description>
+          </project>
+          <project>
+            <name>Tekkan Live! 2</name>
+            <description>
+              <section>
+                Tekkan Live! allows Layman's customers and traders to receive real-time Technical
+                Analysis updates on their stock portfolio. The data originating from Mainframe class
+                number crunching systems are routed through a BEA Aqualogic Integration Layer, and
+                delivered to Web applications and handheld devices.
+              </section>
+              <section>
+                <item>BEA AquaLogic</item>
+                <item>E-CICS 2004 Integration</item>
+              </section>
+              <section>
+                I held the role of a Project Lead involved in creating Workflows
+                and Transformations.
+              </section>
+            </description>
+          </project>
+        </projects>
+      </role>
+    </employment>
+
+    <!-- Jobhunt.in - May 1998 - March 2002 -->
+
+    <employment>
+      <employer>
+        Jobhunt.in
+      </employer>
+      <start>May 1998</start>
+      <finish>March 2002</finish>
+      <role>
+        <name>Technical Lead</name>
+        <projects>
+          <project>
+            <name>Job Portal</name>
+            <description>
+              <section>
+                Jobhunt.in is the world's easiest job portal, where the system automatically parses
+                resumes and identifies relevant content and experience.
+              </section>
+              <section>
+                <item>
+                  Parsers for extracting content and tags from Resumes in Java (based on Apache Lucene
+                  Search Engine)
+                </item>
+                <item>Shell Scripts (Bash, Perl) for running various Jobs on a clustered Linux deployment</item>
+              </section>
+              <section>
+                My role as Technical Lead involved writing components for the Parsing System in Java,
+                and Shell Scripting.
+              </section>
+            </description>
+          </project>
+        </projects>
+      </role>
+    </employment>
+  </experience>
+
+  <awards>
+    <award>
+      Star Performer in the Product Division, Intercom Business Systems (Worldwide) -
+      5 Stars
+    </award>
+    <award>Nobel Prize for Innovation - Jobhunt.in (as a fresher)</award>
+  </awards>
+
+  <education>
+    <qualification>
+      <name></name>
+      <institute>Indian Institute of Technology (Manali)</institute>
+      <start>2002</start>
+      <finish>2004</finish>
+    </qualification>
+    <qualification>
+      <name>BE in Communications and Electronics</name>
+      <institute>Indian Institute of Technology (Manali)</institute>
+      <start>1998</start>
+      <finish>2002</finish>
+    </qualification>
+  </education>
+
+  <certifications>
+    <item>
+      BEA Certified Architect - 2005 (in BEA SOA Domain Model and Reference Architecture
+      to enterprise-scale scenarios).
+    </item>
+    <item>TOGAF Certified Architect - 2007</item>
+    <item>Oracle Certification in databases - 2002</item>
+  </certifications>
+
+  <references>
+    <item>Available on request</item>
+  </references>
+
+</resume>

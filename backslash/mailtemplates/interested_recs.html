@@ -1,0 +1,42 @@
+<div style="font-size: 14px; margin: 0; padding: 0; font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+    text-align: center;">
+    <div style="margin: 32px auto 0px; text-align: left; width: 640px; padding:8px; border:solid 1px #ccc">
+        <h1 style="font-weight: normal; font-size: 32px; margin: 8px;">
+            <a href="http://www.jobhunt.in"><span style="color: #69f;">job</span><span style="color: #039;">hunt.in</span></a>
+        </h1>
+        <div>
+            <h1 style="font-weight: normal; font-size: 20px; margin: 8px; margin-top: 24px; background-color: #f6f6f6;
+                padding: 4px;">
+                {{ num_of_sends }} recruiters requested your resume</h1>
+	    <p style="margin: 0px 0px 8px 12px">{{date|date:"jS N, Y"}}</p>
+            <div style="margin-left: 12px">
+                {% for rec in recruiter_infos %}
+                
+                <h2 style="font-weight: bold; font-size: 14px; margin: 12px 12px 0px 0px; background-color: #fafae6;
+                        padding: 4px; border: solid 1px #eaead6">{{forloop.counter}}. {{rec.name}}</strong> (<a href="mailto:{{rec.email}}"">{{rec.email}}</a>), {{rec.organization}}</h2>
+                <p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 14px">Searching for {{rec.filter_keywords}} skills with
+                        {{rec.filter_experience}} years of experience in {{rec.filter_location}}.</p>
+                    {% if rec.job_title or rec.job_company or rec.job_description %}
+                <p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px; color: #666;">Job Details: 
+                    {{rec.job_title}}{% if rec.job_title and rec.job_company %}, {% endif %} {{rec.job_company}}<br/>
+                    {{rec.job_description}}
+                    </p>
+                    {% endif %}          
+                {% endfor %}
+            </div>
+            <p style="margin: 16px 4px 4px 4px; padding: 4px;">
+                Regards,
+                <br />
+                Jobhunt.in Team</p>
+            <p style="font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+                font-size: 12px; margin: 4px; margin-top: 24px; padding: 4px; color: Gray;">
+                If you don't want to receive emails from jobhunt.in, just send an empty email to
+                <a href="mailto:unsubscribe@jobhunt.in">unsubscribe@jobhunt.in</a>.</p>
+            <p style="font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+                font-size: 12px; margin: 4px; padding: 4px; color: Gray;">
+                &copy;2008 | <a href="http://www.jobhunt.in/about.html" style="color: #79b;">About</a>
+                | <a href="http://www.jobhunt.in/msg.htm" style="color: #79b;">Mail us</a>
+            </p>
+        </div>
+    </div>
+</div>

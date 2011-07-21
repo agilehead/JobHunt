@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--[if lt IE 8]>
+    <script src="/scripts/IE8.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/scripts/mootools.js"></script>
+
+    <script type="text/javascript" src="/scripts/backslash.js"></script>
+
+    <script type="text/javascript">
+        function onLoad() {
+            document.getElementById('name').focus();
+        }
+
+        function validateNSubmit() {
+            if ($('name').value == '') alerts.register('Name field cannot be empty.');
+            if ($('email').value == '') alerts.register('Email Address field cannot be empty.');
+            if ($('message').value == '') alerts.register('Message field cannot be empty.');
+
+            if (alerts.hasMessages()) {
+                alerts.activate();
+            } else {
+                document.contact_form.submit();
+            }
+        }
+    </script>
+
+    <link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+    <title>{{ msg_hdr|default:"Contact Us" }} - Jobhunt.in</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    {{py_scripts}}
+</head>
+<body onload="javascript:onLoad()">
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+        <div id="content">
+            <h1>
+                {{ msg_hdr|default:"Contact Us" }}</h1>
+            <div id="alertBox" class="invisible">
+            </div>
+            <p>
+                You can also mail us at <a href="mailto:team@jobhunt.in">team@jobhunt.in</a></p>
+            <div class="content-box wide">
+                <form id="contact_form" name="contact_form" action="" method="post">
+                <p>
+                    Your name<br />
+                    <input name="name" type="text" id="name" size="28" class="full" value="{{name}}" />
+                </p>
+                <p>
+                    Email Address<br />
+                    <input name="email" type="text" id="email" size="28" class="full" value="{{email}}" />
+                </p>
+                <p>
+                    Message<br />
+                    <textarea name="message" cols="48" rows="8" id="message"></textarea>
+                </p>
+                <p>
+                    <input name="sendButton" type="button" id="sendButton" value="Send" onclick="javascript:validateNSubmit();" />
+                    <input name="messageHeader" type="hidden" id="messageHeader" value="{{ msg_hdr }}" />
+                </p>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--[if lt IE 8]>
+    <script src="/scripts/IE8.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/scripts/mootools.js"></script>
+
+    <script type="text/javascript" src="/scripts/backslash.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        /* <![CDATA[ */
+        function onLoad() {
+            document.getElementById('email').focus();
+        }
+
+        function validateNSubmit() {
+            if (!$('chkIAccept').checked) {
+                alert('You need to agree to the terms and conditions to proceed.');
+            }
+            else if ($('name').value == '' || $('organization').value == '' || $('telephone').value == '') {
+                alerts.displayMessage('Please fill up all fields to proceed.');
+            }
+            else {
+                if (doPasswordsMatch() && validateEmail($('email'))) {
+                    document.recsignup_form.submit();
+                }
+            }
+        }
+
+        function checkValidEmail(email) {
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!filter.test(email)) {
+                return false;
+            }
+            else { return true; }
+        }
+
+        var hasWarnedGenericEmail = false;
+        function checkIfOfficialEmail(email) {
+            var generic = ["@gmail.com", "@yahoo.com", "@yahoo.co.in", "@rediffmail.com", "@hotmail.com", "@live.com"];
+            for (var i = 0; i < generic.length; i++) {
+                if (email.match(generic[i] + '$') != null) {
+                    hasWarnedGenericEmail = true;
+                    return !(window.confirm('If you use your official email instead of ' + email + ', your account will be activated faster. Click "OK" - to change you email, "Cancel" - to continue.'));
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        function validateEmail(email) {
+            email = email.value;
+            if (!checkValidEmail(email)) {
+                alerts.displayMessage('Please enter a valid Email.');
+            } else if (!hasWarnedGenericEmail) {
+                return checkIfOfficialEmail(email);
+            } else return true;
+        }
+
+        function doPasswordsMatch() {
+            var password = $('password').value;
+            var password2 = $('password2').value;
+            var display = $('password-match-display');
+            if (password != password2) {
+                alerts.displayMessage('The passwords do not match.');
+                return false;
+            } else return true;
+        }
+        /* ]]> */
+    </script>
+
+    <link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+    <title>New Registration - Jobhunt.in</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    {{py_scripts}}
+</head>
+<body onload="javascript:onLoad()">
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+        <div id="navbar">
+            <a href="/">Home</a> &gt; Signup</div>
+        <div id="content">
+            <h1>
+                Registration Details</h1>
+            <div id="alertBox" class="invisible">
+            </div>
+            <form id="recsignup_form" name="recsignup_form" method="post" action="">
+	    <input id="key" class="key" value="{{tken.vakue}}" type="hidden" />
+            <div class="content-box">
+                <p>
+                    Your Email<br />
+                    <input name="email" type="text" class="full" id="email" value="{{token.tag}}" size="36" />
+                    <br />
+                    <span class="faded small">Use your official email id (provided by your company).</span></p>
+                <p>
+                    Password (Min 6 characters)<br />
+                    <input name="password" type="password" id="password" size="16" /></p>
+                <p>
+                    Repeat Password<br />
+                    <input name="password2" type="password" id="password2" size="16" /><br />
+                    <span id="password-match-display"></span>
+                </p>
+                <p>
+                    Your Name<br />
+                    <input name="name" type="text" class="full" id="name" value="{{name}}" size="36" />
+                </p>
+                <p>
+                    Name of your Organization/Firm<br />
+                    <input name="organization" type="text" class="full" id="organization" value="{{organization}}"
+                        size="36" />
+                </p>
+                <p>
+                    Telephone Number (Office)
+                    <br />
+                    <input name="telephone" type="text" id="telephone" value="{{telephone}}" size="20" />
+                </p>
+                <div class="para">
+                    <table class="checkboxFrame">
+                        <tr>
+                            <td>
+                                <input name="chkIAccept" type="checkbox" id="chkIAccept" />
+                            </td>
+                            <td>
+                                I accept the <a href="/terms.html">Terms and Conditions</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <p>
+                    <input name="btnFinish" type="button" id="btnFinish" style="width: 100px" value="Finish"
+                        onclick="javascript:validateNSubmit();" />
+                </p>
+            </div>
+            </form>
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

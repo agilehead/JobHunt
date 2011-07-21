@@ -1,0 +1,13 @@
+Jobhunt.in.
+
+Accept the invitation and join this radically simple job site! (During the BETA, you will need an invitation to join.)
+Just go to: http://www.jobhunt.in/recruiters/signup.htm?key={{token}}
+
+What is special?
+
+Advanced Search and Analysis. Better Matches!
+We automatically analyze and extract data from Microsoft Word Resumes. 
+Growing Fast! Find fresh profiles.
+Hundreds of new IT resumes added every week!
+Basic Features are Free for Recruiters.
+No more expensive subscriptions.

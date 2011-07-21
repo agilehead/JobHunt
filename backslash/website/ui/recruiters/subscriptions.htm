@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--[if lt IE 8]>
+    <script src="/scripts/IE8.js" type="text/javascript"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/scripts/mootools.js"></script>
+    <script type="text/javascript" src="/scripts/backslash.js"></script>
+    <script type="text/javascript" src="/scripts/milkbox.js"></script>
+
+    <link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+    <link href="/style/milkbox/milkbox.css" rel="stylesheet" type="text/css" />
+
+    <title>Recruiters: Subscriptions - jobhunt.in</title>
+    <style type="text/css">
+        table
+        {
+            width: 700px;
+            border: solid 1px #cef0ef;
+            margin:auto;
+        }
+
+        table tr td
+        {
+            padding: 4px;
+            border: solid 1px #cef0ef;
+            background-color: #fff;
+        }
+
+        table tr.new td
+        {
+            background-color: #fafafa;
+        }
+
+        table tr td.actions
+        {
+            font-size: 12px;
+        }
+
+	    table thead tr
+	    {
+		font-size:12px;
+		font-weight:bold;
+		background-color: #cef0ef;
+	    }
+    </style>
+	<script language="javascript" type="text/javascript">
+	    /* <![CDATA[ */
+	    function onLoad() {
+	        if (($('email_verified').value).toLowerCase() == "false") {
+	            alerts.displayMessage('To receive resumes, verify your email id by clicking the Activation Link <a href="javascript:sendActivationLinkEmail();">(request new)</a> we emailed.');
+	        }
+	    }
+
+	    var recruiterKey = '{{recruiter_key}}';
+
+	    function sendActivationLinkEmail() {
+	        var req = new Request.JSON({
+	            url: '/ajax/sendactivationemail.ajax',
+	            onComplete: function(response) {
+	                if (response && response.result == 'success') {
+	                    alerts.displayMessage('Please check your mailbox for the activation link.');
+	                } else {
+				if (response.info == 'not_logged_in') {
+				    window.location = '/?flashId=not_logged_in';
+				} else {
+				    alerts.displayMessage('Sending failed. You can try sending a <a href="javascript:sendActivationLinkEmail();">New Verification Link</a> after some time.');
+				    alert('There was a problem requesting a new activation. This may be a connection issue.');
+				}
+	                }
+	            }
+	        }).get();
+	        alerts.displayMessage('Sending.......');
+	    }
+
+	    function deleteFilter(filterId) {
+	        var req = new Request.JSON({
+	            url: '/ajax/recruiters/deletefilter.ajax',
+	            onComplete: function(response) {
+	                if (response && response.result == 'success') {
+	                    $('filter_' + filterId).fade(.1);
+	                    $('editLink_' + filterId).set('text', '');
+	                    $('delLink_' + filterId).set('text', 'gone.');
+	                } else {
+			    if (response.info == 'not_logged_in') {
+				window.location = '/?flashId=not_logged_in';
+			    } else {
+				alert('There was a problem removing the subscription. This may be a connection issue.');
+			    }
+	                }
+	            }
+	        }).get({'filterId': filterId });
+	    }
+	    /* ]]> */
+	</script>
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+    {{py_scripts}}
+</head>
+<body onload="javascript:onLoad()">
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+	    </div>
+	<div id="navbar">
+            <a href="/recruiters/dashboard.htm">Dashboard</a> &gt; Subscriptions
+        </div>
+        <div id="linksList">
+            <a href="/recruiters/settings.htm" >Settings</a> | <a href="/recruiters/changepassword.htm">Change Password</a>
+            | <a href="/recruiters/invites.htm">Give Invites</a> | <a href="/recruiters/faq.html">FAQ</a></div>
+        <div id="content">
+            <h1>
+                Your Subscriptions</h1>
+            <div id="alertBox" class="invisible">
+            </div>
+	    <input type="hidden" id="email_verified" name="email_verified" value="{{email_verified}}"/>
+            <p>
+                <img src="/images/add.gif" alt="add" /> <a href="/recruiters/subscribe.htm">Add a new subscription</a></p>
+	        <div>
+                <table>
+                    <colgroup>
+                        <col style="width: 100px;font-size:12px" />
+                        <col style="width: 340px;text-align:left" />
+                        <col style="width: 100px" />
+                        <col style="width: 100px" />
+                        <col style="width: 60px" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Filter
+                            </th>
+                            <th>
+                                Years
+                            </th>
+                            <th>
+                                Location
+                            </th>
+                            <th>
+                                Salary
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+		    {% if filters %}
+			{% for filter in filters %}
+			    <tr {% if filter.isToday %}  class="new" {% endif %} id="filter_{{filter.id}}">
+				<td> {{ filter.added_on_localTime|date:"jS N" }}</td>
+				<td> {{ filter.keywords }}</td>
+				<td> {{ filter.experience }}</td>
+				<td> {{ filter.location }}</td>
+				<td> {{ filter.max_salary_display }}</td>
+				<td class="actions">
+				    <span id="editLink_{{filter.id}}"><a href="javascript:window.location.href='/recruiters/subscribe.htm?subscriptionId={{filter.id}}';">edit</a></span>
+				</td>
+				<td class="actions">
+				    <span id="delLink_{{filter.id}}"><a href="javascript:deleteFilter({{filter.id}});">delete</a></span>
+				</td>
+			    </tr>
+			{% endfor %}
+		    {% else %}
+			<tr>
+			    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			</tr>
+		    {% endif %}
+                </table>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>

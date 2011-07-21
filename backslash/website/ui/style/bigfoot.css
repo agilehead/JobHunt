@@ -1,0 +1,425 @@
+﻿
+html, body
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+	text-align: center;
+	font-size: 14px;
+	height: 100%;
+	background-color: #278;
+}
+
+a, a:visited
+{
+	color: #26d;
+}
+
+a img
+{
+	border: 0px;
+}
+
+h1
+{
+	font-size: 24px;
+	font-weight: normal;
+	margin-top: 14px;
+	margin-bottom: 14px;
+}
+
+h1.small
+{
+	font-size: 20px;
+}
+
+h2
+{
+	font-size: 20px;
+	font-weight: normal;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+h3
+{
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+h4
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #333;
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+em
+{
+	font-weight: bold;
+	font-style:normal;
+}
+
+ul
+{
+	padding:0px 8px 0px 8px;
+	text-align:left;
+	margin:4px 4px 4px 20px;
+}
+
+ul li
+{
+	padding:4px 4px 4px 2px;
+	margin:0px;
+}
+
+p
+{
+	margin: 4px;
+	padding: 4px;
+}
+
+table
+{
+	border-collapse:collapse;
+}
+
+div
+{
+	padding:0px;
+	margin:0px;
+}
+
+
+/*======================================================================
+							CUSTOM
+=======================================================================*/
+.collapsed
+{
+	display: none;
+}
+
+.subtext
+{
+	font-size: 10px;
+	font-weight: bold;
+}
+
+div.para
+{
+	margin: 4px;
+	padding: 4px;
+}
+
+	div.para table, div.para table tr td
+	{
+		margin:0px;
+		padding:0px;
+	}
+
+p.faded, span.faded, li.faded
+{
+	color: Gray;
+}
+
+p.faded a, span.faded a, li.faded a
+{
+	color: #79b;
+}
+
+p.large, span.large, li.large
+{
+	font-size: 18px;
+}
+
+p.small, span.small, li.small
+{
+	font-size: 12px;
+	line-height:1.3em;
+}
+
+p.condensed, div.para.condensed
+{
+	margin:2px;
+	padding:2px;
+}
+
+.invisible
+{
+	display:none;
+}
+
+.visible
+{
+	display:block;
+}
+
+span.link
+{
+	color: #26d;
+	text-decoration:underline;
+	cursor:pointer;cursor:hand;
+}
+
+.editSectionLink, p.editSectionLink
+{
+	margin:0px 0px 0px 16px;
+	padding: 0px;
+	font-size:12px;
+}
+
+br.big
+{
+	margin-bottom:8px;
+}
+
+.warn
+{
+	color:#C30;
+}
+
+em.warn
+{
+	font-weight:normal;
+}
+/* ======================================================================
+							Bigfoot THEME
+=======================================================================*/
+
+.shell
+{
+	margin: 0px auto 0px auto;
+	background-color: #fff;
+}
+
+.shell h2
+{
+	font-size: 16px;
+	font-weight: bold;
+	margin: 8px 8px 2px 0px;
+	padding-left: 6px;
+	padding-bottom: 2px;
+	border-bottom: solid 1px #ccc;
+	color: #333;
+}
+
+.shell #header
+{
+	width: 640px;
+	margin: auto;
+	padding-top: 20px;
+	height: 64px;
+	text-align: center;
+	padding-left: 264px;
+}
+	.shell #header a.logo
+	{
+		font-family: Tahoma;
+		font-size: 48px;
+		text-decoration: none;
+		float: left;
+		width: 360px;
+	}
+
+		.shell #header a.logo .p1
+		{
+			color: #69F;
+		}
+
+		.shell #header a.logo .p2
+		{
+			color: #039;
+		}
+
+	.shell #header #loginStatus
+	{
+		float: left;
+		width: 240px;
+		text-align: center;
+	}
+		.shell #header #loginStatus a { text-align: center; font-size: 14px; }
+
+
+.shell #navbar, .shell #linksList
+{
+	border-bottom:solid 1px #ccc;
+	margin:8px auto 4px auto;
+	padding:4px 8px 4px 8px;
+	width:400px;
+	font-size:12px;
+}
+
+.shell #linksList
+{
+	border:solid 1px #ccc;
+}
+
+.shell #content
+{
+	width: 960px;
+	margin: 0px auto 32px auto;
+	min-height: 320px;
+	line-height: 1.4em;
+}
+
+.shell #alertBox
+{
+	margin: 8px auto 8px auto;
+	padding: 6px 12px 6px 12px;
+	background-color: #FDF0D7;
+	border: 2px solid #FF9900;
+	font-size: 12px;
+	font-weight: bold;
+	display:none;
+	width:400px;
+}
+	.shell #alertBox ul { margin:0px; padding:0px 0px 0px 12px; }
+		.shell #alertBox ul li { margin:0px; padding:0px; }
+.shell #alertBox.visible { display:block; }
+
+/* FIXME This is temporary
+.shell .passive-alert
+{
+	margin: 8px auto 8px auto;
+	padding: 4px 12px 4px 12px;
+	background-color: #FDF0D7;
+	border: 2px solid #f00;
+	font-size: 12px;
+	font-weight: bold;
+}
+*/
+
+.shell p.pagedesc
+{
+	width: 456px;
+	color: Gray;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+	.shell p.pagedesc a
+	{
+		color: #79b;
+	}
+
+.shell input, .shell select
+{
+	font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+	font-size: 18px;
+	height: 32px;
+	padding: 0px;
+	margin: 4px 0px 0px 0px;
+}
+
+.shell input.full, .shell select.full
+{
+	width: 348px;
+}
+
+.shell input[type=button], .shell input[type=submit]
+{
+	width: 96px;
+}
+.shell input[type=button].medium, .shell input[type=submit].medium
+{
+	width: 128px;
+}
+
+.shell input[type=button].full, .shell input[type=submit].full
+{
+	width: 192px;
+}
+
+.shell div.para table.checkboxFrame, .shell div.para table.checkboxFrame tr
+{
+	margin:0px;
+	padding:0px;
+}
+
+.shell div.para table.checkboxFrame tr td
+{
+	margin:0px;
+	padding:0px 0px 0px 8px;
+}
+
+.shell #content .banner
+{
+    padding:0px 0px 12px 0px;
+}
+
+.shell table.panes
+	{
+	    width: 812px;
+	    margin:0px auto 0px auto;
+	}
+	.shell table.panes tr td
+	{
+	    text-align:left;
+	    vertical-align: top;
+	}
+
+	.shell table.panes tr td ul { margin-left:4px; }
+
+.shell .content-box
+{
+	width: 408px;
+	margin: 4px auto 4px auto;
+	padding: 8px;
+
+	text-align: left;
+	border: solid 1px #ccc;
+	background: #fafafa url(/images/box-bg.png) repeat-x;
+}
+
+	.shell .content-box.wide
+	{
+		width: 492px;
+	}
+
+	.shell .content-box.wider
+	{
+		width: 600px;
+	}
+
+	.shell .content-box.widest
+	{
+		width: 740px;
+	}
+
+	.shell .content-box.ultrawide
+	{
+		width: 840px;
+	}
+
+.shell .footer
+{
+	background: #278 url(/images/footer-bg.gif) repeat-x;
+	color: #fff;
+	width: 100%;
+	min-height: 160px;
+	padding-top: 8px;
+}
+
+	.shell .footer p.faded, .shell .footer span.faded
+	{
+		color: #ccc;
+	}
+
+	.shell .footer a, .shell .footer a:visited
+	{
+		color: #fff;
+	}
+
+	.shell .footer p.faded a, .shell .footer span.faded a
+	{
+		color: #fff;
+	}

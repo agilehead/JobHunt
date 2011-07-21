@@ -1,0 +1,11 @@
+Hello,
+
+We got your resume through email. 
+
+Jobhunt.in can help you receive more relevant results if you set your Job Expectations. It is very easy and takes just a few seconds.
+To do so, paste the following link into your web browser - http://www.jobhunt.in/jobpref.htm?key=$resume_key
+
+The resume will remain active for 2 months. But if you wish to remove it earlier, paste the following link into your web browser - http://www.jobhunt.in/removeresume.htm?key=$resume_key
+
+Regards,
+Jobhunt.in Team

@@ -1,0 +1,77 @@
+<div style="font-size: 14px; margin: 0; padding: 0; font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+    text-align: center;">
+    <div style="margin: 32px auto 0px; text-align: left; width: 640px; padding: 8px;
+	border: solid 1px #ccc">
+	<h1 style="font-weight: normal; font-size: 32px; margin: 8px;">
+	    <a href="http://www.jobhunt.in"><span style="color: #69f;">job</span><span style="color: #039;">hunt.in</span></a>
+	</h1>
+	<div>
+	    <p style="margin: 16px 4px 4px 12px;">
+		Options: <a href="http://www.jobhunt.in/recruiters/subscriptions.htm"
+		    style="color: Blue;">Manage Subscriptions</a>
+	    </p>
+	    <h1 style="font-weight: normal; font-size: 20px; margin: 8px; margin-top: 12px; background-color: #f6f6f6;
+		padding: 4px;">
+		<span style="color: #999">{{num_results}} matches for </span>{{subscription}}</h1>
+	    <p style="margin: 0px 0px 8px 12px">{{date}}</p>
+	    <div style="margin-left: 12px">
+		{% for user in matching_users %}
+		    {% if user.is_premium_user %}
+		<h2 style="font-weight: bold; font-size: 14px; margin: 12px 12px 0px 0px; background-color: #fee;
+		    padding: 4px; border: solid 1px #eaead6">
+		    {{forloop.counter}}. Name hidden (Premium Account)</h2>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 14px">
+					    {{user.profile_info}}
+				    </p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    <span style="color: #999">Tagged as:</span> {{user.tags}}<br />
+		    {% if user.min_salary %}<span style="color: #999">Expected salary:</span> {{user.min_salary}}{% if user.pref_employer %}, {% endif %}{% endif %}
+		    {% if user.pref_employment %}<span style="color: #999">Preferred Employment:</span> {{user.pref_employment}}{% endif %}
+		    {% if user.min_salary or user.pref_employment %}<br />{% endif %}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    {{user.summary}}
+		</p>
+				    <p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    View <a href="http://www.jobhunt.in/recruiters/viewresumesummary.htm?key={{user.key}}&sub_id={{subscription_id}}">Full Summary</a> | Email <a href="mailto:{{user.proxy_email}}">{{user.proxy_email}}</a>
+		</p>
+		    {%	else	%}
+		<h2 style="font-weight: bold; font-size: 14px; margin: 12px 12px 0px 0px; background-color: #fafae6;
+		    padding: 4px; border: solid 1px #eaead6">
+		    {{forloop.counter}}. {{user.name}}</h2>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 14px">
+					    {{user.profile_info}}
+				    </p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    <span style="color: #999">Tagged as:</span> {{user.tags}}<br />
+		    {% if user.min_salary %}<span style="color: #999">Expected salary:</span> {{user.min_salary}}{% if user.pref_employer %}, {% endif %}{% endif %}
+		    {% if user.pref_employment %}<span style="color: #999">Preferred Employment:</span> {{user.pref_employment}}{% endif %}
+		    {% if user.min_salary or user.pref_employment %}<br />{% endif %}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    {{user.summary}}
+		</p>
+		<p style="margin: 0px; padding: 2px; line-height: 1.4em; font-size: 12px">
+		    Download <a href="http://www.jobhunt.in/resumes/html/{{user.key}}?sub_id={{subscription_id}}">HTML</a> | <a href="http://www.jobhunt.in/resumes/doc/{{user.key}}?sub_id={{subscription_id}}">Microsoft Word</a> | Email <a href="mailto:{{user.email}}">{{user.email}}</a>
+		</p>
+		    {% endif %}
+		{% endfor %}
+		<p style="margin: 12px 4px 4px 4px; padding: 2px; line-height: 1.4em; font-size: 14px">
+		    <a href="http://www.jobhunt.in/recruiters/searchresults.htm?sub_id={{subscription_id}}">See more results &gt;&gt;</a></p>
+	    </div>
+	    <p style="margin: 16px 4px 4px 4px; padding: 4px;">
+		Regards,
+		<br />
+		Jobhunt.in Team</p>
+	    <p style="font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+		font-size: 12px; margin: 4px; margin-top: 24px; padding: 4px; color: Gray;">
+		If you don't want to receive emails from jobhunt.in, just send an empty email to
+		<a href="mailto:unsubscribe@jobhunt.in">unsubscribe@jobhunt.in</a>.</p>
+	    <p style="font-family: 'Lucida Grande' ,'Lucida Sans Unicode', arial, Tahoma, helvetica;
+		font-size: 12px; margin: 4px; padding: 4px; color: Gray;">
+		&copy;2009 | <a href="http://www.jobhunt.in/about.html" style="color: #79b;">About</a>
+		| <a href="http://www.jobhunt.in/msg.htm" style="color: #79b;">Mail us</a>
+	    </p>
+	</div>
+    </div>
+</div>

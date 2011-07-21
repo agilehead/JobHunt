@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--[if lt IE 8]>
+    <script src="/scripts/IE8.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/scripts/mootools.js"></script>
+
+    <script type="text/javascript" src="/scripts/backslash.js"></script>
+    <script language="javascript" type="text/javascript">
+    /* <![CDATA[ */
+
+        function requestResume(userKey)	{
+            var req = new Request.JSON({
+                    url:'/ajax/recruiters/requestresume.ajax',
+                    onComplete: function(response){
+                            if (response && response.result == 'success')	{
+                                alerts.displayMessage("Your request has been sent.");
+                            } else {
+				if (response.info == 'not_logged_in') {
+				    window.location = '/?flashId=not_logged_in';
+				} else {
+				    alert('There was a problem sending a request. This may be a connection issue.');
+				}
+                            }
+                    }
+            }).get({'key' : userKey});
+        }
+	/* ]]> */
+    </script>
+
+    <link href="/style/bigfoot.css" rel="stylesheet" type="text/css" />
+    <title>View Resume Summary - Jobhunt.in</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    {{py_scripts}}
+</head>
+<body>
+    <div id="frame" class="shell">
+        <div id="header">
+            <a href="/" class="logo"><span class="p1">job</span><span class="p2">hunt.in</span></a>
+            {{login_status}}
+        </div>
+        <div id="navbar">
+            &lt;&lt; <a href="javascript:goBack();">Back to Previous Page</a>
+        </div>
+        <div id="content">
+            <h1>
+                Resume Summary</h1>
+            <div id="alertBox" class="invisible">
+            </div>
+	    {% if rec %}
+            <p>
+                Email: <a href="mailto:{{user.proxy_email}}">{{user.proxy_email}}</a> | <a href="javascript:requestResume('{{user.key}}');">Request Full Resume</a>
+            </p>
+	    {% endif %}
+            <div class="content-box widest">
+                <h2>
+                    Job Preferences</h2>
+                <p>{{user.job_preferences}}</p>
+                <div class="para">
+                    <table style="width: 500px;">
+                        <tr>
+                            <td>
+                                <span class="faded">Expected Salary:</span> {{user.min_salary_in_lakhs}} Lakhs
+                            </td>
+                            <td>
+                                <span class="faded">Location:</span> {{user.pref_location}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <h2>
+                    Resume Summary</h2>
+                <p>
+                    <span class="faded">Current Job Type:</span> {{user.curr_employer}}</p>
+                <p>
+                    <span class="faded">Current Designation:</span> {{user.curr_designation}}</p>
+                <p>
+                    <span class="faded">Skills:</span> {{user.tags}}</p>
+                <p>
+                    <span class="faded">Experience:</span> {{user.experience}} years</p>
+                <div class="para">
+                    {% if user.summary_display %} {{user.summary_display}} {% else %} Summary not created yet. {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="small faded">&copy; <a href="http://www.agilehead.com">Agilehead</a> 2010 | <a href="/msg.htm">Contact Us</a> | <a href="/terms.html">Terms</a> | <a href="/about.html">About</a> | <a href="http://blog.agilehead.com">Blog</a> | jobhunt.in is <a href="http://freshmeat.net/projects/jobhuntin">Open Source</a></p>
+        </div>
+    </div>
+</body>
+</html>
