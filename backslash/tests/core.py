@@ -24,10 +24,10 @@ class RecruiterTestCase(unittest.TestCase):
         self.name = 'Tommy Middlefinger'
         self.password = 'abcdefg'
         self.organization = 'Jobhunt'
-        self.test_rec_email = 'hemchand.t@gmail.com'
+        self.test_rec_email = 'email@example.com'
         self.test_keywords = 'Testing 123'
         self.experience = 5
-        self.telephone = '9900128218'
+        self.telephone = '9999999999'
         self.location = 'Bangalore'
         self.max_salary = 2000000
         self.job_title = 'Project Manager'
